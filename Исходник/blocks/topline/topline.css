@@ -1,0 +1,40 @@
+@import url('./menu/topline__menu.css');
+@import url('./search-area/topline__search-area.css');
+@import url('./search/topline__search.css');
+@import url('./searchResult/topline__searchResult.css');
+
+.topline {
+    width: 1380px;
+    height: 68px;
+    background-color: #060A21;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    margin: auto;
+}
+
+.topline__wrapper {
+    width: 1120px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width:430px) {
+    .topline {
+        width: calc(100% - 30px);
+        flex-direction: column;
+        align-items: baseline;
+        height: fit-content;
+        padding: 15px;
+    }
+
+    .topline__wrapper {
+        width: 100%;
+        flex-direction: column;
+        align-items: baseline;
+        height: fit-content;
+    }
+}

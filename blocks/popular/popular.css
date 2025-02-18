@@ -1,0 +1,14 @@
+@import url('./title/popular__title.css');
+@import url('./arrows/popular__arrows.css');
+
+.popular {
+    width: 1120px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.swiper-popular {
+    overflow: hidden;
+}

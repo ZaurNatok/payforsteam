@@ -1,0 +1,9 @@
+.topline__search-area {
+    position: relative;
+}
+
+@media screen and (max-width:430px) {
+    .topline__search-area {
+        width: calc(100% - 20px);
+    }
+}

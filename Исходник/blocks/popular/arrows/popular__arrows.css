@@ -1,0 +1,28 @@
+.popular__arrows {
+    display: flex;
+}
+
+.popular__arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: #181b36;
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.arrow > .fas {
+    color: #747796;
+    transition: .3s;
+}
+
+.arrow:hover > .fas {
+    color: #fff;
+}
+
+.arrows_left, .arrows_right {
+    margin: auto;
+    color: #747796;
+}

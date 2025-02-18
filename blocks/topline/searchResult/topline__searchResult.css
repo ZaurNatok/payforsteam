@@ -1,0 +1,29 @@
+.topline__searchResult {
+    width: calc(100% - 30px);
+    height: fit-content;
+    background-color: #111613;
+    position: absolute;
+    z-index: 2;
+    margin-top: 10px;
+    border-radius: 15px;
+    padding: 15px;
+    display: none;
+    color: #fff;
+}
+
+.searchResult__item {
+    display: flex;
+    align-items: center;
+}
+
+.searchResult__title {
+    text-decoration: none;
+    color: #fff;
+}
+
+.searchResult__icon {
+    width: 44px;
+    border-radius: 100%;
+    height: 44px;
+    margin-right: 15px;
+}

@@ -1,0 +1,25 @@
+.topline__search {
+    width: 412px;
+    height: 44px;
+    background-color:#111634;
+    border-radius: 5px;
+    padding: 5px 10px 5px 60px;
+    border: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #999CB4;
+}
+
+.topline__search:focus-visible {
+    outline: none;
+}
+
+@media screen and (max-width:430px) {
+    .topline__search {
+        width: calc(100% - 50px);
+    }
+}

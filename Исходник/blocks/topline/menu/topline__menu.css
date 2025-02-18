@@ -1,0 +1,22 @@
+.topline__menu {
+    display: flex;
+    list-style: none;
+    color: #fff;
+    font-size: 14px;
+}
+
+.menu-item {
+    margin-right: 90px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+@media screen and (max-width:430px) {
+    .topline__menu {
+        display: none;
+    }
+}
