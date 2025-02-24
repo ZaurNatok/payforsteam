@@ -221,7 +221,7 @@ function loadServiceParameters(service) {
 
         inputSum.addEventListener('input', function() {
             sumToPopup = inputSum.value * localStorage.getItem('currencyRate');
-            sumToTitle.textContent = '~' + sumToPopup.toFixed(2).toLocaleString() + ' ' + `${localStorage.getItem('currency')} зачислению на счет ${service.name}`;
+            sumToTitle.textContent = '~' + sumToPopup.toFixed(2).toLocaleString() + ' ' + `${localStorage.getItem('currency')} к зачислению на счет ${service.name}`;
             paymentSum.textContent = '~' + sumToPopup.toFixed(2).toLocaleString() + ' ' + localStorage.getItem('currency');
             sumToPay = Number(inputSum.value);
             finalSum.textContent = (Number(inputSum.value) + 75).toLocaleString() + ' ' + '₽';
@@ -229,7 +229,7 @@ function loadServiceParameters(service) {
 
         inputSum.setAttribute('placeholder', 'Введите сумму');
         inputLabelSum.textContent = 'Сумма пополнения, в рублях';
-        sumToTitle.textContent = sumToPopup.toFixed(2).toLocaleString() + ' ' + `${localStorage.getItem('currency')} зачислению на счет ${service.name}`;
+        sumToTitle.textContent = sumToPopup.toFixed(2).toLocaleString() + ' ' + `${localStorage.getItem('currency')} к зачислению на счет ${service.name}`;
 
         inputSum.addEventListener('input', function() {
 
@@ -465,7 +465,6 @@ function loadServiceParameters(service) {
 
 search.addEventListener('input', function() {
     let searchResultArr = [];
-    console.log(services)
 
     services.forEach(el => {
         if(el.name.toLowerCase().includes(search.value.toLowerCase())) {
@@ -896,29 +895,32 @@ function checkInputs() {
 
 function startSBP(order, agentTransactionId, dateTime) {
 
-    let password = 'o6zmp4svjrvxg68a';
-    let token = [{"Amount": `${order.Amount}`},{"Description": `${order.Description}`},{"OrderId": `${order.OrderId}`},{"Password": `${password}`},{"TerminalKey": `${order.TerminalKey}`}];
-
-    let values = [];
-    for(let i = 0; i < token.length; i++) {
-        values.push(String(Object.values(token[i])))
-    }
-
-    const result = values.join('');
-
-    generateToken(result).then((result) => {
-        localStorage.setItem('token', result);
-
-        let theOrder = {
-            "TerminalKey": order.TerminalKey.toString(),
-            "Amount": Number(sumToPay) * 100,
-            "OrderId": order.OrderId.toString(),
-            "Description": "Оплата покупки",
-            "Token": result
-        }
-    
-        sbpInit(theOrder, agentTransactionId, dateTime);
+    fetch('http://localhost:3000/generateToken', { 
+        method: 'POST',
+        headers: { 
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+            {
+                "Amount": order.Amount,
+                "OrderId": order.OrderId.toString(),
+                "Description": "Оплата покупки"
+            }         
+        )})
+        .then(res => {
+            return res.text();
         })
+        .then(res => {
+            let theOrder = {
+                "Amount": order.Amount,
+                "OrderId": order.OrderId.toString(),
+                "Description": "Оплата покупки",
+                "Token": res
+            }
+
+            sbpInit(theOrder, agentTransactionId, dateTime);
+        })
+        .catch(err => console.log({ err }));
 }
 
 function generateToken(string) {
@@ -940,18 +942,16 @@ function sbpInit(order, agentTransactionId, dateTime) {
     },
     body: JSON.stringify(
         {
-            "TerminalKey": "1574412702003DEMO",
             "Amount": order.Amount,
             "OrderId": order.OrderId.toString(),
             "Description": "Оплата покупки",
-            "Token": localStorage.getItem('token')
+            "Token": order.Token
         }         
     )})
     .then(res => {
-        // console.log(res);
         return res.json();
     })
-    .then(res => getQR(res, agentTransactionId, dateTime)) // отправляется ответ на клиент
+    .then(res => getQR(res, agentTransactionId, dateTime))
     .catch(err => console.log({ err }))
 }
 

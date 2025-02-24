@@ -23,7 +23,7 @@ let operationsDate = document.querySelector('.operationsDate');
 let download = document.querySelector('.operations__download');
 
 testDB();
-// getBalance();
+getBalance();
 
 // Тест база данных
 
@@ -31,7 +31,7 @@ function testDB() {
 
 loader.classList.remove('hidden');
 
-    fetch('http://217.114.14.54:80/payments', { 
+    fetch('http://localhost:3000/payments', { 
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json'

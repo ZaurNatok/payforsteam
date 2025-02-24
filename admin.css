@@ -84,12 +84,12 @@ body {
 
 .main__content {
     padding: 20px;
-    width: calc(100% - 300px);
+    width: calc(100% - 40px);
+    font-size: 11px;
 }
 
 .content__top-bar {
-    display: flex
-;
+    display: flex;
     background-color: #fff;
     box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
     border-radius: 0.428rem;
