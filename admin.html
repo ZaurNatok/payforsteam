@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="popup hidden">
+        <div class="popup__wrapper"></div>
+        <div class="popup__window">
+            <div class="popup__content">
+                <span class="loader"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main">
+        <!-- <div class="main__menu">
+            <div class="menu__content">
+                <ul class="menu__items">
+                    <li class="items__item">Пользователи</li>
+                    <li class="items__item">Список ТСП</li>
+                    <li class="items__item">Статистика</li>
+                    <li class="items__item">Действия</li>
+                    <li class="items__item">Отчеты</li>
+                    <li class="items__item">Администраторы</li>
+                </ul>
+            </div>
+        </div> -->
+        <div class="main__content">
+            <!-- <div class="content__top-bar">
+                <ul class="top-bar__items">
+                    <li class="items__item"><a class="menu-item" href="#">Главная</a></li>
+                    <li class="items__item"><a class="menu-item href="#">Помощь</a></li>
+                    <li class="items__item"><a class="menu-item href="#">Настройки</a></li>
+                </ul>
+                <ul class="top-bar__items">
+                    <li class="items__item">
+                        <div class="user-icon"></div>
+                        <p class="user-name">Наток З.</p>
+                    </li>
+                </ul>
+            </div> -->
+            <h3 class="content__header">Текущий баланс (лимит): <span class="balance"></span></h3>
+            <div class="content__data">
+                <div class="data data__amount">
+                    <div class="amount__icon"></div>
+                    <h3 class="data__title">Объем успешных</h3>
+                    <p class="amount__text"></p>
+                </div>
+                <div class="data data__operations">
+                    <div class="amount__icon"></div>
+                    <h3 class="data__title">Количество успешных</h3>
+                    <p class="amount__text"></p>
+                </div>
+                <div class="data data__income">
+                    <div class="amount__icon"></div>
+                    <h3 class="data__title">ЧКД</h3>
+                    <p class="amount__text"></p>
+                </div>
+            </div>
+            <div class="content__operations">
+                <div class="operations__filters">
+                    <input type="text" placeholder="Найти по ID" class="operations__filter-input filter-agentId">
+                    <input type="text" placeholder="Найти по ID Партнера" class="operations__filter-input filter-id">
+                    <input type="text" placeholder="Найти по сумме" class="operations__filter-input filter-sum"> </br></br>
+                    <form action="" class="datesFilter" name="datesFilter">
+                        <label for="dateFrom">С</label>
+                        <input type="date" name="dateFrom" placeholder="Найти по дате" class="operations__filter-input filter-date filter-date-from">
+                        <label for="dateTill">По</label>
+                        <input type="date" name="dateTill" placeholder="Найти по дате" class="operations__filter-input filter-date filter-date-till">
+                        <button class="dateFilterButton">Искать</button>
+                    </form>
+                    <div class="operations__download">Экспорт в Excel</div>
+                </div>
+
+                <h2 class="operationsDateTitle">Платежи <span class="operationsDate"></span></h2>
+ 
+                <table class="payments" id="paymentsTable">
+                    <thead class="payments__header">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Id Партнера</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Время</th>
+                            <th scope="col">Сервис</th>
+                            <th scope="col">Сервис</th>
+                            <th scope="col">Сумма принятая</th>
+                            <th scope="col">Сумма к зачислению</th>
+                            <th scope="col">Валюта</th>
+                            <th scope="col">Комиссия %</th>
+                            <th scope="col">Комиссия</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Статус партнера</th>
+                            <th scope="col">Аккаунт</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <tr>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                            <td scope="col">Id</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+<script src="./admin.js"></script>
+</html>

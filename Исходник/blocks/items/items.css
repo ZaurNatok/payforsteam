@@ -1,0 +1,41 @@
+.items {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    width: 1120px;
+    margin: auto;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+
+.items .item {
+    width: 264px;
+}
+
+.item__image_div {
+    width: 264px;
+    height: 186px;
+    overflow: hidden;
+    border-radius: 40px;
+    margin: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.item__image {
+    transition: .3s;
+}
+
+.item__link:hover > .items__item .item__image {
+    transform: scale(1.1);
+    transition: .3s;
+}
+
+.item__title {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #fff;
+}
