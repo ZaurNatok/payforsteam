@@ -967,7 +967,7 @@ function generateToken(string) {
 
 
 function getQR(res, agentTransactionId, dateTime) {
-
+console.log(res)
 let result = '';
     if(res.ErrorCode == 0) {
         let password = 'o6zmp4svjrvxg68a';
