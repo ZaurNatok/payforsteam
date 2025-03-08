@@ -22,8 +22,6 @@ let operationsDate = document.querySelector('.operationsDate');
 
 let download = document.querySelector('.operations__download');
 
-let test = 'f';
-
 testDB();
 getBalance();
 

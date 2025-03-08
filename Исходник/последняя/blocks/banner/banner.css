@@ -1,0 +1,10 @@
+.banner {
+    width: 1120px;
+    height: auto;
+    margin: 47px auto;
+    border-radius: 20px;
+}
+
+.banner__item {
+    height: 375px;
+}

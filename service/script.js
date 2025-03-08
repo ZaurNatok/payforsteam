@@ -82,7 +82,6 @@ function getCurrencyRate() {
 }
 
 function setLocalStorage(res) {
-    console.log(res.result)
     if(res.result == 220) {
         popup.classList.remove('hidden');
         loaderPopup.classList.add('hidden');
@@ -242,7 +241,7 @@ function loadServiceParameters(service) {
             sumToTitle.textContent = '~' + sumToPopup.toFixed(2).toLocaleString() + ' ' + `${localStorage.getItem('currency')} к зачислению на счет ${service.name}`;
             paymentSum.textContent = '~' + sumToPopup.toFixed(2).toLocaleString() + ' ' + localStorage.getItem('currency');
             sumToPay = Number(inputSum.value);
-            finalSum.textContent = (Number(inputSum.value) + 75).toLocaleString() + ' ' + '₽';
+            finalSum.textContent = (Number(inputSum.value) + 50).toLocaleString() + ' ' + '₽';
         })
 
         inputSum.setAttribute('placeholder', 'Введите сумму');
@@ -663,7 +662,7 @@ function resultOrcestrator(result, agentTransactionId, res, dateTime, acc) {
 
         let order = {
             // "TerminalKey": "1574412702003DEMO",
-            "Amount": Number(sumToPay) * 100,
+            "Amount": (Number(sumToPay) + 50) * 100,
             "OrderId": res.agentTransactionId,
             "Description": "Оплата покупки",
         }
@@ -913,7 +912,7 @@ function checkInputs() {
 
 function startSBP(order, agentTransactionId, dateTime) {
 
-    fetch('http://localhost:3000/generateToken', { 
+    fetch('http://localhost:3000/sbpInit', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
@@ -926,17 +925,10 @@ function startSBP(order, agentTransactionId, dateTime) {
             }         
         )})
         .then(res => {
-            return res.text();
+            return res.json();
         })
         .then(res => {
-            let theOrder = {
-                "Amount": order.Amount,
-                "OrderId": order.OrderId.toString(),
-                "Description": "Оплата покупки",
-                "Token": res
-            }
-
-            sbpInit(theOrder, agentTransactionId, dateTime);
+            getQR(res, agentTransactionId, dateTime);
         })
         .catch(err => console.log({ err }));
 }
@@ -952,29 +944,30 @@ function generateToken(string) {
     });
 }
 
-function sbpInit(order, agentTransactionId, dateTime) {
-    fetch('http://localhost:3000/sbpInit', { 
-    method: 'POST',
-    headers: { 
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(
-        {
-            "Amount": order.Amount,
-            "OrderId": order.OrderId.toString(),
-            "Description": "Оплата покупки",
-            "Token": order.Token
-        }         
-    )})
-    .then(res => {
-        return res.json();
-    })
-    .then(res => getQR(res, agentTransactionId, dateTime))
-    .catch(err => console.log({ err }))
-}
+// function sbpInit(order, agentTransactionId, dateTime) {
+//     fetch('http://localhost:3000/sbpInit', { 
+//     method: 'POST',
+//     headers: { 
+//     'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(
+//         {
+//             "Amount": order.Amount,
+//             "OrderId": order.OrderId.toString(),
+//             "Description": "Оплата покупки",
+//             "Token": order.Token
+//         }         
+//     )})
+//     .then(res => {
+//         return res.json();
+//     })
+//     .then(res => getQR(res, agentTransactionId, dateTime))
+//     .catch(err => console.log({ err }))
+// }
 
 
 function getQR(res, agentTransactionId, dateTime) {
+
 let result = '';
     if(res.ErrorCode == 0) {
         let password = 'o6zmp4svjrvxg68a';
@@ -1019,11 +1012,10 @@ let result = '';
                     }
                     showQR(theOrder, agentTransactionId, dateTime);
                 }
-        
 
             })
     } else {
-        console.log('Init закончился ошибкой')
+        console.log('Ошибка запроса QR')
     }
 }
 
@@ -1042,7 +1034,6 @@ function showQR(res, agentTransactionId, dateTime) {
             }         
         )})
         .then(res => {
-            // console.log(res);
             return res.json();
         })
         .then(res => showQRforClient(res, agentTransactionId, dateTime)) // отправляется ответ на клиент
@@ -1064,7 +1055,6 @@ function showPayload(res, agentTransactionId, dateTime) {
             }         
         )})
         .then(res => {
-            // console.log(res);
             return res.json();
         })
         .then(res => showQRforClient(res, agentTransactionId, dateTime)) // отправляется ответ на клиент
@@ -1072,28 +1062,44 @@ function showPayload(res, agentTransactionId, dateTime) {
 }
 
 function showQRforClient(res, agentTransactionId, dateTime) {
-    loaderPopup.classList.add('hidden');
-    popupInfo.textContent = 'Отсканируйте QR код СБП для проведения оплаты с использованием мобильного приложения Вашего банка'
-    payAfterCheck.setAttribute('style', 'width: fit-content; background-color: #fff;');
 
-    if(screen.width <= 480 ) {
-        let paySbpButton = document.createElement('a');
-        paySbpButton.setAttribute('href', res.Data);
-        paySbpButton.classList.add('pay');
-        paySbpButton.setAttribute('style', 'padding: 10px 15px');
-        payAfterCheck.setAttribute('style', 'background: none');
-        payAfterCheck.setAttribute('style', 'width: fit-content');
-        paySbpButton.setAttribute('target', '_blank');
-        payAfterCheck.appendChild(paySbpButton);
-        paySbpButton.textContent = 'Оплатить по СБП';
-        popupInfo.textContent = '';
+    if(res.ErrorCode == '99' || res.ErrorCode == '3001') {
+        loaderPopup.classList.add('hidden');
+        popupIcon.setAttribute('src', '../img/error.png')
+        popupIcon.classList.remove('hidden');
+        popupInfo.textContent = `Произошла ошибка. Мы уже знаем об этом и работаем над ее устранением. Пожалуйста, повторите попытку позже`;
+        popup.addEventListener('click', (e) => {
+            if(e.target.classList.contains('close') || e.target.classList.contains('popup__wrapper')) {
+                popup.classList.add('hidden');
+                popupIcon.classList.add('hidden');
+                popupInfo.textContent = '';
+                location.reload()
+            }
+        })
+        return;
     } else {
-        payAfterCheck.innerHTML = `${res.Data}`;
+        loaderPopup.classList.add('hidden');
+        popupInfo.textContent = 'Отсканируйте QR код СБП для проведения оплаты с использованием мобильного приложения Вашего банка';
+        payAfterCheck.setAttribute('style', 'width: fit-content; background-color: #fff;');
+    
+        if(screen.width <= 480 ) {
+            let paySbpButton = document.createElement('a');
+            paySbpButton.setAttribute('href', res.Data);
+            paySbpButton.classList.add('pay');
+            paySbpButton.setAttribute('style', 'padding: 10px 15px');
+            payAfterCheck.setAttribute('style', 'background: none');
+            payAfterCheck.setAttribute('style', 'width: fit-content');
+            paySbpButton.setAttribute('target', '_blank');
+            payAfterCheck.appendChild(paySbpButton);
+            paySbpButton.textContent = 'Оплатить по СБП';
+            popupInfo.textContent = '';
+        } else {
+            payAfterCheck.innerHTML = `${res.Data}`;
+        }
+        popup.classList.remove('hidden');
+        payAfterCheck.classList.remove('hidden');
+        getState(res, agentTransactionId, dateTime);
     }
-
-    popup.classList.remove('hidden');
-    payAfterCheck.classList.remove('hidden');
-    getState(res, agentTransactionId, dateTime);
 }
 
 function getState(payment, agentTransactionId, dateTime) {

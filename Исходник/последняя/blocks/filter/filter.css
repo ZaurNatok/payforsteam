@@ -1,0 +1,98 @@
+.filter {
+    width: 1120px;
+    margin: 37px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter__wrapper {
+    display: flex;
+}
+
+
+.filter__item {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    background-color:#262C56;
+    padding: 0 20px;
+    border-radius: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.filter__item:hover {
+    background-color:#0DE5B6;
+    color: black;
+}
+
+.filter__item:hover .item__filter-title {
+    color: black;
+}
+
+.filter__item_active {
+    background-color:#0DE5B6;
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+.filter__title {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #fff;
+}
+
+.filter__title_active {
+    color: black;
+}
+
+.filter-container__all {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #0DE5B6;
+    text-decoration: none;
+}
+
+
+@media screen and (max-width:430px) {
+    .filter {
+        width: calc(100% - 30px);
+        margin: 20px auto;
+        display: flex;
+        justify-content: space-between;
+        width: calc(100% - 30px);
+        flex-direction: column;
+    }
+
+    .filter__item {
+        margin-right: 10px;
+        padding: 0 10px;
+    }
+
+    .filter__wrapper {
+        overflow-x: scroll;
+        overflow-y: clip;
+        width: calc(100% + 15px);
+        white-space: nowrap;
+    }
+
+    .filter__wrapper::-webkit-scrollbar {
+        width: 0;
+      }
+}
+
+
+
+
