@@ -315,11 +315,6 @@ app.post('/check', ((reqClient, resClient) => {
           res.status(500).json({ message: 'Internal Server Error' });
         }
         
-
-
-      
-
- 
       // fetch('https://rest-api-test.tinkoff.ru/v2/Init', {
       //   method: 'POST',
       //   headers: {
