@@ -899,15 +899,6 @@ function checkInputs() {
 
 
 
-
-
-
-
-
-
-
-
-
 // СБП
 
 function startSBP(order, agentTransactionId, dateTime) {
@@ -966,58 +957,120 @@ function generateToken(string) {
 // }
 
 
-function getQR(res, agentTransactionId, dateTime) {
-console.log(res)
-let result = '';
-    if(res.ErrorCode == 0) {
-        let password = 'o6zmp4svjrvxg68a';
+// function getQR(res, agentTransactionId, dateTime) {
 
-        if( screen.width <= 480 ) {
-            let token = [{"DataType": "PAYLOAD"},{"Password": `${password}`},{"PaymentId": `${res.PaymentId}`},{"TerminalKey": `${res.TerminalKey}`}];
+// let result = '';
+//     if(res.ErrorCode == 0) {
+//         let password = 'o6zmp4svjrvxg68a';
+
+//         if( screen.width <= 480 ) {
+//             let token = [{"DataType": "PAYLOAD"},{"Password": `${password}`},{"PaymentId": `${res.PaymentId}`},{"TerminalKey": `${res.TerminalKey}`}];
                 
-            let values = [];
-            for(let i = 0; i < token.length; i++) {
-                values.push(String(Object.values(token[i])))
+//             let values = [];
+//             for(let i = 0; i < token.length; i++) {
+//                 values.push(String(Object.values(token[i])))
+//             }
+//             result = values.join('');
+//         } else {
+//             let token = [{"DataType": "IMAGE"},{"Password": `${password}`},{"PaymentId": `${res.PaymentId}`},{"TerminalKey": `${res.TerminalKey}`}];
+                
+//             let values = [];
+//             for(let i = 0; i < token.length; i++) {
+//                 values.push(String(Object.values(token[i])))
+//             }
+        
+//             result = values.join('');
+//         }
+        
+//         generateToken(result).then((result) => {
+//                 localStorage.setItem('token', result);
+
+//                 if( screen.width <= 480 ) {
+//                     let theOrder = {
+//                         "TerminalKey": res.TerminalKey.toString(),
+//                         "PaymentId": res.PaymentId,
+//                         "DataType": "PAYLOAD",
+//                         "Token": result
+//                     }
+
+//                     showPayload(theOrder, agentTransactionId, dateTime);
+//                 } else {
+//                     let theOrder = {
+//                         "TerminalKey": res.TerminalKey.toString(),
+//                         "PaymentId": res.PaymentId,
+//                         "DataType": "IMAGE",
+//                         "Token": result
+//                     }
+//                     showQR(theOrder, agentTransactionId, dateTime);
+//                 }
+
+//             })
+//     } else {
+//         console.log('Ошибка запроса QR')
+//     }
+// }
+
+
+function getQR(result, agentTransactionId, dateTime) {
+
+        if(result.ErrorCode == 0) {
+    
+            if( screen.width <= 480 ) {
+
+                fetch('http://localhost:3000/generateQR', { 
+                    method: 'POST',
+                    headers: { 
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(
+                        {
+                            "DataType": "PAYLOAD",
+                            "PaymentId": result.PaymentId
+                        }         
+                    )})
+                    .then(res => {
+                        return res.text();
+                    })
+                    .then(res => {
+                        let theOrder = {
+                            "PaymentId": result.PaymentId,
+                            "DataType": "PAYLOAD",
+                            "Token": res
+                        }
+                        showPayload(theOrder, agentTransactionId, dateTime);
+                    })
+                    .catch(err => console.log({ err }));
+
+            } else {
+
+                fetch('http://localhost:3000/generateQR', { 
+                    method: 'POST',
+                    headers: { 
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(
+                        {
+                            "DataType": "IMAGE",
+                            "PaymentId": result.PaymentId
+                        }         
+                    )})
+                    .then(res => {
+                        return res.text();
+                    })
+                    .then(res => {
+                        let theOrder = {
+                            "PaymentId": result.PaymentId,
+                            "DataType": "IMAGE",
+                            "Token": res
+                        }
+                        showQR(theOrder, agentTransactionId, dateTime);
+                    })
+                    .catch(err => console.log({ err }));
             }
-            result = values.join('');
         } else {
-            let token = [{"DataType": "IMAGE"},{"Password": `${password}`},{"PaymentId": `${res.PaymentId}`},{"TerminalKey": `${res.TerminalKey}`}];
-                
-            let values = [];
-            for(let i = 0; i < token.length; i++) {
-                values.push(String(Object.values(token[i])))
-            }
-        
-            result = values.join('');
+            console.log('Ошибка запроса QR')
         }
-        
-        generateToken(result).then((result) => {
-                localStorage.setItem('token', result);
-
-                if( screen.width <= 480 ) {
-                    let theOrder = {
-                        "TerminalKey": res.TerminalKey.toString(),
-                        "PaymentId": res.PaymentId,
-                        "DataType": "PAYLOAD",
-                        "Token": result
-                    }
-
-                    showPayload(theOrder, agentTransactionId, dateTime);
-                } else {
-                    let theOrder = {
-                        "TerminalKey": res.TerminalKey.toString(),
-                        "PaymentId": res.PaymentId,
-                        "DataType": "IMAGE",
-                        "Token": result
-                    }
-                    showQR(theOrder, agentTransactionId, dateTime);
-                }
-
-            })
-    } else {
-        console.log('Ошибка запроса QR')
     }
-}
 
 function showQR(res, agentTransactionId, dateTime) {
     fetch('https://api.payforsteam.ru/getQr', { 
