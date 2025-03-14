@@ -1073,14 +1073,14 @@ function getQR(result, agentTransactionId, dateTime) {
     }
 
 function showQR(res, agentTransactionId, dateTime) {
-    fetch('https://api.payforsteam.ru/getQr', { 
+    console.log('tt')
+    fetch('http://localhost:3000/getQr', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
         },
         body: JSON.stringify(
             {
-                "TerminalKey": "1574412702003DEMO",
                 "PaymentId": res.PaymentId,
                 "DataType": "IMAGE",
                 "Token": res.Token
@@ -1094,14 +1094,13 @@ function showQR(res, agentTransactionId, dateTime) {
 }
 
 function showPayload(res, agentTransactionId, dateTime) {
-    fetch('https://api.payforsteam.ru/getQr', { 
+    fetch('http://localhost:3000/getQr', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
         },
         body: JSON.stringify(
             {
-                "TerminalKey": "1574412702003DEMO",
                 "PaymentId": res.PaymentId,
                 "DataType": "PAYLOAD",
                 "Token": res.Token
@@ -1154,6 +1153,10 @@ function showQRforClient(res, agentTransactionId, dateTime) {
         getState(res, agentTransactionId, dateTime);
     }
 }
+
+
+
+
 
 function getState(payment, agentTransactionId, dateTime) {
 

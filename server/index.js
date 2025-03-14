@@ -446,7 +446,14 @@ app.post('/check', ((reqClient, resClient) => {
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify(reqClient.body) // прокисуются данные с клиента
+        body: JSON.stringify(
+          {
+            "TerminalKey": `${bankTerminalKey}`,
+            "PaymentId": reqClient.body.PaymentId,
+            "DataType": reqClient.body.DataType,
+            "Token": reqClient.body.Token
+          }
+        ) // прокисуются данные с клиента
       })
       .then(res => {
         return res.json()
