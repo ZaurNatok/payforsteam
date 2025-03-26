@@ -12,7 +12,7 @@ let programmsButtonTitle = document.querySelector('.filter__title_programms');
 let mainContainer = document.querySelector('.items_main');
 let newsContainer = document.querySelector('.news__wrapper');
 
-let search = document.querySelector('.topline__search');
+let search = document.querySelector('.search');
 let searchResultDiv = document.querySelector('.topline__searchResult');
 
 // Вызовы функций при загрузке сайта
@@ -29,6 +29,15 @@ document.addEventListener('click', function (e) {
 })
 
 // Поиск
+
+document.addEventListener('click', function(e) {
+    if(e.target.classList.contains('search-area') || e.target.classList.contains('search') || e.target.classList.contains('search-icon')) {
+        search.classList.toggle('search_opened');
+        search.focus()
+        search.value = '';
+        searchResultDiv.classList.remove('visible');
+    }
+})
 
 search.addEventListener('input', function() {
     let searchResultArr = [];
@@ -86,7 +95,7 @@ el.forEach(element => {
 if(search.value == '') {
     searchResultDiv.textContent = '';
     searchResultDiv.classList.remove('visible');
-}
+    }
 }
 
 // Переключение типов сервисов
@@ -140,27 +149,31 @@ if(e.target == gamesButton || e.target == gamesFilter) {
 // serviceCardsLoad(services);
 
 function serviceCardsLoad(services) {
-
-    const container = document.querySelector('.items_main');
-    // services.forEach(el => createCard(el, container))
-
+console.log(services)
 services.forEach(el => {
     if(el.isPopular == true) {
         const container = document.querySelector('.swiper-wrapper_popular');
-        createCard(el, container)
+        createCardPopular(el, container);
     } 
-    if(el.type == 'Игры' || el.group == 'Тестовая услуга') {
-        const container = document.querySelector('.items_main');
+    if(el.type == 'Игры' || el.name == 'Тестовая услуга') {
+        const container = document.querySelector('.swiper-wrapper_games');
+        createCard(el, container);
+    }
+    if(el.type == 'Сервисы') {
+        const container = document.querySelector('.swiper-wrapper_services');
+        createCard(el, container)
+    }
+    if(el.type == 'Программы') {
+        const container = document.querySelector('.swiper-wrapper_programms');
         createCard(el, container)
     } 
 }) 
 
 }
 
-function createCard(el, container) {
-
-let title = el.name;
-let id = el.serviceId;
+function createCardPopular(el, container) {
+    let title = el.name;
+    let id = el.serviceId;
 
     const itemLink = document.createElement('a');
     const itemContainer = document.createElement('div');
@@ -168,9 +181,9 @@ let id = el.serviceId;
     const itemTitle = document.createElement('h3');
 
     itemLink.classList.add('item__link', 'swiper-slide');
-    itemContainer.classList.add('items__item');
-    itemImage.classList.add('item__image_div');
-    itemTitle.classList.add('item__title');
+    itemContainer.classList.add('items__item-new');
+    itemImage.classList.add('item__image_pipular_div');
+    itemTitle.classList.add('items-popular__title');
 
     if(id == 'P0101') {
         let imgLink = './img/test.jpg';
@@ -200,9 +213,52 @@ let id = el.serviceId;
     itemTitle.textContent = title;
 }
 
+function createCard(el, container) {
+
+let title = el.name;
+let id = el.serviceId;
+
+    const itemLink = document.createElement('a');
+    // const itemContainer = document.createElement('div');
+    const itemImage = document.createElement('div');
+    const itemTitle = document.createElement('h3');
+
+    // itemContainer.classList.add('items__item');
+    itemLink.classList.add('item__item', 'swiper-slide');
+    itemImage.classList.add('item__image');
+    itemTitle.classList.add('item__title');
+    
+    if(id == 'P0101') {
+        let imgLink = './img/test.jpg';
+        itemImage.setAttribute('style', `background-image: url(${imgLink});`)
+    } else if(id == 'P1011') {
+        let imgLink = './img/beeline-kaz.jpg';
+        itemImage.setAttribute('style', `background-image: url(${imgLink});`)
+    } else if(id == 'P1012') {
+        let imgLink = './img/herbalife.png';
+        itemImage.setAttribute('style', `background-image: url(${imgLink});`)
+    } else if(id == 'P0005') {
+        let imgLink = './img/alseko.webp';
+        itemImage.setAttribute('style', `background-image: url(${imgLink});`)
+    } else if(id == 'P0102') {
+        let imgLink = el.imageLink;
+        itemImage.setAttribute('style', `background-image: url(${imgLink});`)
+    } else {
+        let imgLink = './img/default.webp';
+        itemImage.setAttribute('style', `background-image: url(${imgLink});`)
+    }
+    itemLink.setAttribute('href', `service/index.html?id=${id}`)
+
+    container.appendChild(itemLink);
+    itemLink.appendChild(itemImage);
+    itemLink.appendChild(itemTitle);
+
+    itemTitle.textContent = title;
+}
+
 // Загрузка новостей
 
-getNews();
+// getNews();
 
 function getNews () {
     return fetch(`https://newsdata.io/api/1/news?apikey=pub_5998959fa921d44bec0f4534d9d39848c29bd&q=steam&country=ru&language=ru`)

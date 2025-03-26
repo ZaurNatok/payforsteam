@@ -1,10 +1,31 @@
 .banner {
-    width: 1120px;
-    height: auto;
-    margin: 47px auto;
-    border-radius: 20px;
+    max-width: 1920px;
+    height: 800px;
+    background-color: #000000;
+    position: relative;
+    top:-104px;
+    z-index: 0;
+    margin: auto;
+    overflow: hidden;
 }
 
-.banner__item {
-    height: 375px;
+.banner__shadow {
+    height: 100%;
+    width: 800px;
+    background: radial-gradient(circle 500px, #3c1156, transparent);
+    position: absolute;
+    left: -100px;
+    z-index: 1;
+}
+
+.banner__title {
+    font-size: 40px;
+    color: #fff;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    width: 50%;
+    text-align: left;
+    line-height: 45px;
+    z-index: 2;
 }

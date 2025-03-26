@@ -4,22 +4,20 @@
 @import url('./searchResult/topline__searchResult.css');
 
 .topline {
-    width: 1380px;
-    height: 68px;
-    background-color: #060A21;
+    width: calc(100% - 30px);
+    height: 104px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
-    margin: auto;
+    padding: 0 0 0 30px;
+    overflow: hidden;
 }
 
 .topline__wrapper {
-    width: 1120px;
     margin: auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    width: -webkit-fill-available;
 }
 
 @media screen and (max-width:430px) {

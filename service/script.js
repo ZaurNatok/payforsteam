@@ -59,7 +59,7 @@ getServiceParamentres(serviceId);
 getCurrencyRate();
 
 function getCurrencyRate() {
-    fetch('https://api.payforsteam.ru/check', { 
+    fetch('http://localhost:3000/check', { 
         method: 'POST', 
         headers: { 
             'Content-Type': 'application/json'
@@ -111,7 +111,7 @@ function getServiceParamentres(id) {
 
     // theService(services) 
 
-    fetch('https://api.payforsteam.ru/service', { 
+    fetch('http://localhost:3000/service', { 
         method: 'POST', 
         headers: { 
             'Content-Type': 'application/json'

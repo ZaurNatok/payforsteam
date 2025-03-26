@@ -171,12 +171,12 @@ app.get('/payments', async (req, res) => {
 
 
 app.post('/check', ((reqClient, resClient) => {
-
+console.log('вот он', reqClient.body)
     fetch('http://185.102.73.67:8081/TestPTService/api/v20/check', {
       method: 'POST',
       headers: {
           'content-type': 'application/json',
-          'Authorization': `${authorizationProfitable}`,
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjUxIiwiVHlwZSI6IkFnZW50IiwiQWdlbnRJZCI6IjU2IiwibmJmIjoxNzM1MDYyMTYxLCJleHAiOjIwNDkwMzI3NzIsImlhdCI6MTczNTA2MjE2MSwiaXNzIjoiUGF5TmV0IiwiYXVkIjoiQ3liZXJpYVNvZnQifQ.SwDP4I3rXJ4UwA52aPWXDclJnoxlFp2cNC0MknDx58s'
       },
       body: JSON.stringify(reqClient.body) // прокисуются данные с клиента
     })

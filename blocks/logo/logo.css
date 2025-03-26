@@ -1,5 +1,13 @@
 .logo {
-    width: 77px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 32px 0 0;
+}
+
+.logoLink {
+    text-decoration: none;
+    z-index: 2;
 }
 
 @media screen and (max-width:430px) {

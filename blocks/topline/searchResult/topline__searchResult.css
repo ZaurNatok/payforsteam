@@ -1,14 +1,15 @@
 .topline__searchResult {
-    width: calc(100% - 30px);
+    width: 329px;
     height: fit-content;
     background-color: #111613;
     position: absolute;
-    z-index: 2;
-    margin-top: 10px;
-    border-radius: 15px;
+    z-index: 3;
+    top: 90px;
+    border-radius: 32px;
     padding: 15px;
     display: none;
     color: #fff;
+    left: 127px;
 }
 
 .searchResult__item {
