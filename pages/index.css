@@ -350,6 +350,39 @@ font-style: normal;
         width: calc(100% - 80px);
     }
 
+    .main {
+        margin: -80px auto;
+        padding: 10px;
+    }
+
+    .advantages {
+        flex-direction: column;
+    }
+
+    .advantages__item {
+        width: calc(100% - 65px);
+    }
+
+    .advantages__item:not(:last-child) {
+        margin-bottom: 15px;
+    }
+
+    .section {
+        margin: 32px 0;
+    }
+
+    .section__link {
+        display: none;
+    }
+
+    .banner-content__subtitle {
+        font-size: 12px;
+    }
+
+    .banner-content__image {
+        display: none;
+    }
+
     .news {
         width: calc(100% - 30px);
         margin: auto;
@@ -359,10 +392,13 @@ font-style: normal;
         margin: 15px 0;
     }
 
+    .banner__columns {
+        right: -50px;
+    }
 
     .banner {
         width: auto;
-        height: 200px;
+        height: 600px;
         margin: 10px auto;
         border-radius: 0;
     }
@@ -415,7 +451,7 @@ font-style: normal;
     .faq {
         flex-direction: column;
         width: calc(100% - 30px);
-        margin: 30px auto;
+        margin: auto;
     }
 
     .left__title {
