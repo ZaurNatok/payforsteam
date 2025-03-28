@@ -70,7 +70,7 @@ font-style: normal;
 } */
 
 .news-image {
-    width: inherit;
+    width: -webkit-fill-available;
     border-radius: 15px 15px 0 0;
     height: 200px;
     background-size: cover;
@@ -346,13 +346,18 @@ font-style: normal;
 
 @media screen and (max-width:430px) {
 
+    .news__item {
+        max-width: 100%;
+    }
+
     .banner-content__wrapper {
-        width: calc(100% - 80px);
+        width: calc(100% - 50px);
     }
 
     .main {
         margin: -80px auto;
-        padding: 10px;
+        padding: 25px 10px;
+        border-radius: 20px 20px 0 0;
     }
 
     .advantages {
@@ -361,6 +366,11 @@ font-style: normal;
 
     .advantages__item {
         width: calc(100% - 65px);
+        padding: 20px;
+    }
+
+    .advantages__item {
+        margin: auto;
     }
 
     .advantages__item:not(:last-child) {

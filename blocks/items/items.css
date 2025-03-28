@@ -13,7 +13,7 @@
     width: -webkit-fill-available;
 }
 
-.swiper-slide {
+.items-popular__wrapper .swiper-slide {
     width: fit-content !important;
 }
 
@@ -114,5 +114,11 @@
 
 .swiper-games, .swiper-services, .swiper-programms {
     overflow: hidden;
-    width: calc(100% + 30px);
+    width: 100%;
+}
+
+@media screen and (max-width:430px) {
+
+
+
 }

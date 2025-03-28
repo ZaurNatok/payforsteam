@@ -22,11 +22,11 @@
 
 @media screen and (max-width:430px) {
     .topline {
-        width: calc(100% - 10px);
+        width: calc(100% - 20px);
         flex-direction: column;
         align-items: baseline;
         height: fit-content;
-        padding: 5px;
+        padding: 10px;
     }
 
     .topline__wrapper {
