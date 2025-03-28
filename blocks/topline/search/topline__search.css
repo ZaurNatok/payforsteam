@@ -60,4 +60,10 @@
     .topline__search {
         width: calc(100% - 50px);
     }
+
+    .search_opened {
+        width: -webkit-fill-available;
+        border-radius: 32px;
+        padding-left: 55px;
+    }
 }
