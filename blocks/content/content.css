@@ -273,6 +273,7 @@
     color: #fff;
     font-weight: 700;
     width: 100%;
+    text-decoration: none;
 }
 
 .loader {
@@ -449,6 +450,12 @@
         flex-direction: column;
         width: calc(100% - 64px);
         margin: auto;
+    }
+
+    .popup__window {
+        width: calc(100% - 102px);
+        left: calc(50% - 187px);
+        top: calc(50% - 200px);
     }
 }
 
