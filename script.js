@@ -67,8 +67,8 @@ function searchService(el) {
 el.forEach(element => {
 
     services.forEach(elt => {
-        if(elt.name == element) {
 
+        if(elt.name == element) {
             let title = elt.name;
             let imgLink = elt.imageLink;
             let id = elt.serviceId;
@@ -149,7 +149,7 @@ if(e.target == gamesButton || e.target == gamesFilter) {
 // serviceCardsLoad(services);
 
 function serviceCardsLoad(services) {
-console.log(services)
+
 services.forEach(el => {
     if(el.isPopular == true) {
         const container = document.querySelector('.swiper-wrapper_popular');
@@ -201,7 +201,7 @@ function createCardPopular(el, container) {
         let imgLink = el.imageLink;
         itemImage.setAttribute('style', `background-image: url(${imgLink});`)
     } else {
-        let imgLink = './img/default.webp';
+        let imgLink = el.imageLink;
         itemImage.setAttribute('style', `background-image: url(${imgLink});`)
     }
     itemLink.setAttribute('href', `service/index.html?id=${id}`)
@@ -244,7 +244,7 @@ let id = el.serviceId;
         let imgLink = el.imageLink;
         itemImage.setAttribute('style', `background-image: url(${imgLink});`)
     } else {
-        let imgLink = './img/default.webp';
+        let imgLink = el.imageLink;
         itemImage.setAttribute('style', `background-image: url(${imgLink});`)
     }
     itemLink.setAttribute('href', `service/index.html?id=${id}`)

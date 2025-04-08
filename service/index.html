@@ -24,7 +24,7 @@
             <div class="popup__content">
                 <span class="loader hidden"></span>
                 <img src="" class="popup__icon hidden" alt="icon">
-                <p class="popup__info"></p>
+                <p class="popup__info play-bold"></p>
                 <div class="payAfterCheck hidden"></div>
                 <!-- <img src="../img/qr.webp" class="payAfterCheck hidden"> -->
                 <i class="fa fa-times close" aria-hidden="true"></i>
@@ -34,37 +34,52 @@
 
 <!-- header -->
 
-    <section class="topline">
-        <div class="topline__wrapper">
-            <a href="../index.html"><img src="../img/vtb.png" alt="logo" class="logo logo_topline"></a>
-            <!-- <ul class="topline__menu">
-                <li class="menu-item"><a href="../index.html" class="link">Главная</a></li>
-                <li class="menu-item"><a href="#" class="link">Все сервисы</a></li>
-                <li class="menu-item"><a href="#" class="link">Вопрос / ответ</a></li>
-            </ul> -->
-            <div class="topline__search-area">
-                <input type="text" class="topline__search" placeholder="Поиск">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                <div class="topline__searchResult"></div>
+<section class="topline">
+    <div class="topline__wrapper">
+        <a href="../index.html" class="logoLink">
+            <!-- <img src="./img/vtb.png" alt="logo" class="logo logo_topline"> -->
+            <p class="logo play-bold">Play </br> Boost</p>
+        </a>
+
+        <div class="search-area">
+            <div class="search__wrapper">
+                <input type="text" class="search">
+                <img src="../img/search-icon.png" alt="search-icon" class="search-icon">
             </div>
         </div>
-    </section>
+
+    </div>
+
+</section>
 
 <!-- Content -->
 
 <section class="content">
-    <div class="content__left">
 
-        <div class="content-block content-block_centered">
+    <div class="content__title-logo">
+        <div alt="service-icon" class="content-block__img"></div>
+        <h1 class="content-block__title play-bold"><span class="service-title"></span></h1>
+    </div>
+
+    <div class="content__service">
+
+
+    
+    <div class="content__left play-regular">
+        <!-- <div class="content-block content-block_centered">
             <img src="../img/steam.png" alt="Steam" class="content-block__img">
             <div class="content-block__description">
                 <h1 class="content-block__title">Пополнение баланса <span class="service-title"></span></h1>
                 <p class="content-block__subtitle"></p>
             </div>
-        </div>
+        </div> -->
 
         <div class="choose-sum content-block content__parameters">
-            <h2 class="payment-parameters">Параметры оплаты</h2>
+            <h2 class="payment-parameters">Пополнение баланса</h2>
+            <div class="content__subtitle">
+                <img src="../img/icon.png" class="content__subtitle-icon">
+                <p class="content-block__subtitle play-regular"></p>
+            </div>
             <div class="choose-sum__items">
                 <!-- <p class="choose-sum__item">5$</p>
                 <p class="choose-sum__item">10$</p>
@@ -163,12 +178,12 @@
 
     </div>
 
-    <div class="content__right">
+    <div class="content__right play-regular">
         <div class="content-block content-block_pay">
-            <h2 class="content-block__title">К оплате</h2>
+            <h2 class="content-block__title">Способ пополнения</h2>
             <div class="content-block__information">
                 <i class="fa fa-info-circle" aria-hidden="true"></i>
-                <p class="information">Перед оплатой обязательно ознакомьтесь с разделом «Частые вопросы» ниже</p>
+                <p class="information play-regular">Перед оплатой обязательно ознакомьтесь с разделом «Частые вопросы» ниже</p>
             </div>
             <div class="pay-info">
                 <div class="pay-info__item">
@@ -191,11 +206,12 @@
                 </div>
             </div>
             <form>
-                <button class="pay">Оплатить</button>
+                <button class="pay play-bold">Оплатить</button>
              </form>
         </div>
 
     </div>
+</div>
 
 </section>
 
@@ -254,7 +270,7 @@
 
     <footer class="footer">
         <div class="footer__left">
-            <img src="../img/vtb.png" alt="logo" class="logo">
+            <img src="#" alt="logo" class="logo">
             <p class="footer__copyright">© 2024 Best Game</p>
         </div>
         <div class="footer__center">

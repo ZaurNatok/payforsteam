@@ -1,8 +1,9 @@
 .faq {
-    width: 1120px;
-    margin: 40px auto 30px;
     display: flex;
     justify-content: space-between;
+    max-width: 1440px;
+    margin: 30px auto;
+    padding: 0 32px;
 }
 
 .faq__title {
@@ -39,7 +40,7 @@
 .faq__right {
     width: 834px;
     border-radius: 20px;
-    background-color: #1E2342;
+    background-color: #1f1b23;
     padding: 50px 40px;
 }
 

@@ -1139,7 +1139,7 @@ const services = [
         type: 'Программы',
         name: 'Adobe Creative Cloud',
         subtitle: 'Для аккаунтов США. При регистрации нового аккаунта используйте почту с доменом gmail.com',
-        imageLink: './img/adobeCreativeCloud.jpg',
+        imageLink: '../img/adobeCreativeCloud.jpg',
         popupTypes: ['Ваучер'],
         region: [ 
             {
@@ -1150,7 +1150,7 @@ const services = [
             }
         ],
         isPopular: false,
-        id: 29
+        serviceId: 29
     },
     {
         type: 'Программы',

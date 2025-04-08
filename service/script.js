@@ -41,7 +41,7 @@ let popupPaymentSum = document.querySelector('.paymentsum');
 
 let regionTitle = document.querySelector('.region-select__title');
 
-let search = document.querySelector('.topline__search');
+let search = document.querySelector('.search');
 let searchResultDiv = document.querySelector('.topline__searchResult');
 
 const url = new URL(
@@ -127,6 +127,7 @@ function getServiceParamentres(id) {
 }
 
 function theService(services) {
+
     let theService = services.services.find((element) => element.serviceId == serviceId);
     // let theService = services.find((element) => element.serviceId == serviceId);
     loadServiceParameters(theService);
@@ -143,7 +144,7 @@ function loadServiceParameters(service) {
     
     if(service.serviceId == 'P0101') {
         let imgLink = '../img/test.jpg';
-        serviceImage.setAttribute('src', `${imgLink}`)
+        serviceImage.setAttribute('style', `background-image:url(${imgLink})`)
     } else if(service.serviceId == 'P1011') {
         let imgLink = '../img/beeline-kaz.jpg';
         serviceImage.setAttribute('src', `${imgLink}`)
@@ -158,7 +159,7 @@ function loadServiceParameters(service) {
         serviceImage.setAttribute('src', `${imgLink}`)
     }
 
-    serviceParamentresTitle.textContent = 'Параметры оплаты';
+    serviceParamentresTitle.textContent = 'Пополнение баланса';
     let form = document.createElement('form');
     form.classList.add('payment-form');
     form.setAttribute('name', 'paymentParams');

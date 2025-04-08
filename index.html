@@ -437,19 +437,24 @@
 
 <sector class="banner-content">
    <div class="banner-content__wrapper">
-        <div class="banner-content__info">
-            <h2 class="banner-content__title">Индивидуальный заказ</h2>
-            <p class="banner-content__subtitle">Не нашли на нашем сайте подписку, номинал или нужный сервис? <br> Поможем оформить и оплатить</p>
-            <div class="banner-content__button">Подробнее</div>
-        </div>
+    <div class="left-side">
         <img src="./img/content.png" alt="" class="banner-content__image">
+        <div class="banner-content__info">
+            <h2 class="banner-content__title">Не нашли нужную игру или сервис?</h2>
+            <p class="banner-content__subtitle">Мы работаем над увеличением ассортимента. Оставьте заявку и мы рассмотрим ваше пожелание</p>
+        </div>
+    </div>
+     <div class="banner-content__button">
+        <p class="banner-content__text play-bold">Оформить заявку</p>
+     </div>
+
    </div>
 </sector>
 
 <!-- News -->
 
     <sector class="news">
-        <h2 class="news__title">Новости</h2>
+        <h2 class="news__title play-bold">Интересное из игрового мира</h2>
         <div class="news__items swiper-news">
             
             <div class="news__wrapper swiper-wrapper">
@@ -714,7 +719,7 @@ const swiper = new Swiper('.swiper', {
     const swiperPopular = new Swiper('.swiper-popular', {
       //To add margin to slides
           spaceBetween: 8,
-          slidesPerView: 2,
+          slidesPerView: 1.2,
           slidesPerGroup: 2,
 
     //   autoplay: {
