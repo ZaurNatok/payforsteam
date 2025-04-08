@@ -395,7 +395,6 @@
 
 @media screen and (max-width:430px) {
     .content {
-        width: calc(100% - 30px);
         margin: auto;
         flex-direction: column;
         margin-top: 30px;
@@ -409,12 +408,9 @@
         align-items: baseline;
     }
 
-    .content-block__img {
-        margin-bottom: 15px;
-    }
-
     .content__left {
         margin-bottom: 20px;
+        
     }
 
     .content__right {
@@ -422,9 +418,37 @@
         margin: auto;
     }
 
+    .faq__right {
+        width: calc(100% - 32px);
+        padding: 20px 15px;
+        border-radius: 10px;
+    }
+
+    .question__title {
+        font-size: 18px;
+    }
+
     .payment-sum {
         flex-direction: column;
         display: flex;
+    }
+
+    .content__service {
+        flex-direction: column;
+    }
+
+    .content-block_pay {
+        width: calc(100% - 64px);
+    }
+
+    .content-block__title {
+        font-size: 32px;
+    }
+
+    .faq {
+        flex-direction: column;
+        width: calc(100% - 64px);
+        margin: auto;
     }
 }
 

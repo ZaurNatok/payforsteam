@@ -473,11 +473,7 @@ font-style: normal;
         column-gap: 10px;
     }
 
-    .faq {
-        flex-direction: column;
-        width: calc(100% - 30px);
-        margin: auto;
-    }
+
 
     .left__title {
         font-size: 38px;
@@ -486,15 +482,7 @@ font-style: normal;
 
  
 
-    .faq__right {
-        width: calc(100% - 30px);
-        padding: 20px 15px;
-        border-radius: 10px;
-    }
 
-    .question__title {
-        font-size: 18px;
-    }
 
 
 }
