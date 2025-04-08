@@ -57,8 +57,10 @@
 <section class="content">
 
     <div class="content__title-logo">
-        <div alt="service-icon" class="content-block__img"></div>
+        <div alt="service-icon" class="content-block__img loading"></div>
         <h1 class="content-block__title play-bold"><span class="service-title"></span></h1>
+        <!-- <div alt="service-icon" class="content-block__img"></div>
+        <h1 class="content-block__title play-bold"><span class="service-title"></span></h1> -->
     </div>
 
     <div class="content__service">
@@ -204,9 +206,14 @@
                     <p class="pay-info__pay-type pay-info__pay-type_result"></p>
                     <!-- <span class="loader hidden"></span> -->
                 </div>
+                <!-- <div id="sticky-component" class="hidden sticky-component">
+                    <form>
+                        <button class="pay play-bold">Оплатить</button>
+                     </form>
+                </div> -->
             </div>
             <form>
-                <button class="pay play-bold">Оплатить</button>
+                <button class="pay play-bold" id="theElement">Оплатить</button>
              </form>
         </div>
 
@@ -270,8 +277,11 @@
 
     <footer class="footer">
         <div class="footer__left">
-            <img src="#" alt="logo" class="logo">
-            <p class="footer__copyright">© 2024 Best Game</p>
+            <a href="../index.html" class="logoLink">
+                <!-- <img src="./img/vtb.png" alt="logo" class="logo logo_topline"> -->
+                <p class="logo play-bold">Play </br> Boost</p>
+            </a></br>
+            <p class="footer__copyright">© 2024 PlayBoost</p>
         </div>
         <div class="footer__center">
             <ul class="footer__menu">
@@ -283,9 +293,9 @@
         <div class="footer__right">
             <div class="footer__support">
                 <h3 class="footer__title">Поддержка</h3>
-                <a href="#" class="footer__link">support@bestgame.com</a>
+                <a href="#" class="footer__link">support@playboost.com</a>
             </div>
-            <a href="#" class="footer__link">Пользовательское соглашение</a>
+            <!-- <a href="#" class="footer__link">Пользовательское соглашение</a> -->
         </div>
     </footer>
 

@@ -381,9 +381,6 @@
     cursor: pointer;
 }
 
-
-
-
 .buttons__button {
     background-color: #009fdf;
     padding: 10px 15px;
@@ -392,6 +389,26 @@
     border-radius: 5px;
     text-align: center;
     cursor: pointer;
+}
+
+.loading {
+    background-color: #1f1b23;
+}
+
+.sticky-component {
+    position: fixed;
+    z-index: 999;
+    flex-direction: column;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 64px);
+    background-color: #181b36;
+    padding: 32px;
+    border-radius: 32px 32px 0 0;
+}
+
+.hidden {
+    display: none;
 }
 
 @media screen and (max-width:430px) {
@@ -453,8 +470,8 @@
     }
 
     .popup__window {
-        width: calc(100% - 102px);
-        left: calc(50% - 167px);
+        width: calc(100% - 128px);
+        left: 32px;
         top: calc(50% - 200px);
     }
 }

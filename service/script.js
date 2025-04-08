@@ -44,9 +44,31 @@ let regionTitle = document.querySelector('.region-select__title');
 let search = document.querySelector('.search');
 let searchResultDiv = document.querySelector('.topline__searchResult');
 
+let stickyElement = document.querySelector('.sticky-component');
+
 const url = new URL(
     document.location.href
 )
+
+// кнопка оплаты при скролле
+
+// window.addEventListener('scroll', () => {
+//     if (window.pageYOffset < 430) {
+//         stickyElement.classList.remove('hidden');
+//     } else {
+//         stickyElement.classList.add('hidden');
+//     }
+// });
+
+// window.addEventListener('scroll', () => {
+//     let place = document.body.scrollTop;
+//     let alertOn = document.getElementById('theElement').offsetTop;
+//     if(place > alertOn){
+//     alert('Function execute here');
+//     this.removeEventListener('scroll', arguments.callee, false);
+//     }
+// });
+
 
 // Определяем id сервиса
 
