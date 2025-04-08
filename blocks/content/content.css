@@ -454,7 +454,7 @@
 
     .popup__window {
         width: calc(100% - 102px);
-        left: calc(50% - 187px);
+        left: calc(50% - 167px);
         top: calc(50% - 200px);
     }
 }
