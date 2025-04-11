@@ -267,7 +267,7 @@ function printPayments(arr) {
 
         if(statusBank.textContent == 'Успешно') {
             statusBank.classList.add('green')
-        } if(statusBank.textContent == 'Ошибка' || statusBank.textContent == 'Отклонен банком плательщика') {
+        } if(statusBank.textContent == 'Ошибка' || statusBank.textContent == 'Отклонен банком плательщика' || statusBank.textContent == 'Ошибка генерации QR') {
             statusBank.classList.add('red')
         } if(statusBank.textContent == 'В процессе') {
             statusBank.classList.add('yellow')

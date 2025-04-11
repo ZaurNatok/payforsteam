@@ -34,7 +34,6 @@ let loader = document.querySelector('.loader');
 let comissionSum = document.querySelector('.comission');
 let errorText = document.querySelector('.error');
 
-
 let popupServiceName = document.querySelector('.service-name');
 let popupClientEmail = document.querySelector('.client-email');
 let popupPaymentSum = document.querySelector('.paymentsum');
@@ -45,6 +44,50 @@ let search = document.querySelector('.search');
 let searchResultDiv = document.querySelector('.topline__searchResult');
 
 let stickyElement = document.querySelector('.sticky-component');
+
+let paymentMethods = document.querySelector('.pay-info__payment-methods');
+let paymentMethodTitle = document.querySelectorAll('.payment-method__title');
+
+let currency = document.querySelector('.currency');
+let popupSum = document.querySelector('.topup-sum');
+
+let cyberCard = document.querySelector('.cybercard');
+let cyberIcon = document.querySelector('.cyber');
+
+// Выбор способа оплаты
+
+let methods = [
+    {
+        id: 1,
+        title: 'SBP'
+    },
+    {
+        id: 2,
+        title: 'Card'
+    },
+    {
+        id: 3,
+        title: 'Cyber'
+    }
+]
+
+let comission = 50;
+
+function ifCyberCard() {
+    if(cyberCard.checked) {
+        cyberIcon.setAttribute('src', '../img/cybercard_chosen.png');
+    } else {
+        cyberIcon.setAttribute('src', '../img/cybercard.png');
+    }
+
+}
+paymentMethods.addEventListener('click', function(){
+    ifCyberCard();
+})
+
+// 
+
+
 
 const url = new URL(
     document.location.href
@@ -122,6 +165,7 @@ function setLocalStorage(res) {
     } else {
         localStorage.setItem('currencyRate', res.rate);
         localStorage.setItem('currency', res.currency);
+        currency.textContent = localStorage.getItem('currency');
     }
 }
 
@@ -201,6 +245,7 @@ function loadServiceParameters(service) {
         input.setAttribute('pattern', el.regexp);
         input.setAttribute('placeholder', el.title);
         error.classList.add('error');
+        error.classList.add('play-regular');
         error.classList.add('hidden');
 
         if(el.required == true) {
@@ -261,10 +306,11 @@ function loadServiceParameters(service) {
 
         inputSum.addEventListener('input', function() {
             sumToPopup = inputSum.value * localStorage.getItem('currencyRate');
+            popupSum.textContent = inputSum.value;
             sumToTitle.textContent = '~' + sumToPopup.toFixed(2).toLocaleString() + ' ' + `${localStorage.getItem('currency')} к зачислению на счет ${service.name}`;
             paymentSum.textContent = '~' + sumToPopup.toFixed(2).toLocaleString() + ' ' + localStorage.getItem('currency');
             sumToPay = Number(inputSum.value);
-            finalSum.textContent = (Number(inputSum.value) + 50).toLocaleString() + ' ' + '₽';
+            finalSum.textContent = (Number(inputSum.value) + Number(comission)).toLocaleString() + ' ' + '₽';
         })
 
         inputSum.setAttribute('placeholder', 'Введите сумму');
@@ -273,9 +319,9 @@ function loadServiceParameters(service) {
 
         inputSum.addEventListener('input', function() {
 
-                if(inputSum.value == '' || inputSum.value < 50 || inputSum.value > 500) {
+                if(inputSum.value == '' || inputSum.value < 10 || inputSum.value > 15000) {
                     errorSum.classList.remove('hidden');
-                    errorSum.textContent = 'Минимальная сумма оплаты 50 рублей, максимальная 500 рублей';  
+                    errorSum.textContent = 'Минимальная сумма оплаты 10 рублей, максимальная 15 000 рублей';  
                 }
                 else {
                     errorSum.classList.add('hidden');
@@ -886,10 +932,10 @@ function checkInputs() {
         }
     }
 
-    if(document.querySelector('.payment-sum') && document.querySelector('.payment-sum').value < 50 || document.querySelector('.payment-sum').value > 500) {
+    if(document.querySelector('.payment-sum') && document.querySelector('.payment-sum').value < 10 || document.querySelector('.payment-sum').value > 15000) {
         let sumInput = document.querySelector('.payment-sum');
         sumInput.nextElementSibling.classList.remove('hidden');
-        sumInput.nextElementSibling.textContent = 'Минимальная сумма оплаты 50 рублей, максимальная 500 рублей';
+        sumInput.nextElementSibling.textContent = 'Минимальная сумма оплаты 10 рублей, максимальная 15 000 рублей';
         return 'error';
     }
 
@@ -944,7 +990,8 @@ function startSBP(order, agentTransactionId, dateTime) {
         .then(res => {
             getQR(res, agentTransactionId, dateTime);
         })
-        .catch(err => console.log({ err }));
+        .catch(err => console.log({ err })
+        );
 }
 
 function generateToken(string) {
@@ -1091,12 +1138,42 @@ function getQR(result, agentTransactionId, dateTime) {
                     .catch(err => console.log({ err }));
             }
         } else {
-            console.log('Ошибка запроса QR')
+                loaderPopup.classList.add('hidden');
+                popupIcon.setAttribute('src', '../img/error.png')
+                popupIcon.classList.remove('hidden');
+                popupInfo.textContent = `Произошла ошибка. Мы уже знаем об этом и работаем над ее устранением. Пожалуйста, повторите попытку позже`;
+                popup.addEventListener('click', (e) => {
+                    if(e.target.classList.contains('close') || e.target.classList.contains('popup__wrapper')) {
+                        popup.classList.add('hidden');
+                        popupIcon.classList.add('hidden');
+                        popupInfo.textContent = '';
+                        location.reload()
+                    }
+                })
+            console.log('Ошибка запроса QR');
+
+                // Обновление записи в базе
+
+                fetch('https://api.payforsteam.ru/payresultSBP', { 
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    }, 
+                    body: JSON.stringify({
+                        'statusBank': "Ошибка генерации QR",
+                        'statusPartner': "Операция неуспешна",
+                        'agentTransactionId': agentTransactionId
+                })})
+                .then(res => {
+                    return res.json()
+                })
+                .then(res => res)
+                .catch(err => console.log({ err }))
         }
     }
 
 function showQR(res, agentTransactionId, dateTime) {
-    console.log('tt')
+
     fetch('http://localhost:3000/getQr', { 
         method: 'POST',
         headers: { 
