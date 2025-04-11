@@ -54,6 +54,9 @@ let popupSum = document.querySelector('.topup-sum');
 let cyberCard = document.querySelector('.cybercard');
 let cyberIcon = document.querySelector('.cyber');
 
+let paymentComission = document.querySelector('.payment-comission');
+
+
 // Выбор способа оплаты
 
 let methods = [
@@ -79,10 +82,20 @@ function ifCyberCard() {
     } else {
         cyberIcon.setAttribute('src', '../img/cybercard.png');
     }
-
 }
 paymentMethods.addEventListener('click', function(){
     ifCyberCard();
+    let paymentAmount = document.querySelector('.payment-sum');
+    
+    if(cyberCard.checked) {
+        comission = 0;
+        paymentComission.textContent = 0 + ' ' + '₽';
+        finalSum.textContent = (Number(paymentAmount.value) + Number(comission)).toLocaleString() + ' ' + '₽';
+    } else {
+        comission = 50;
+        paymentComission.textContent = 50 + ' ' + '₽';
+        finalSum.textContent = (Number(paymentAmount.value) + Number(comission)).toLocaleString() + ' ' + '₽';
+    }
 })
 
 // 
@@ -612,6 +625,9 @@ el.forEach(element => {
 payButton.addEventListener('click', function(e) {
     e.preventDefault();
 
+    if(cyberCard.checked) {
+        comission = 0;
+    }
 
     // checkInputs()
 
@@ -663,7 +679,7 @@ payButton.addEventListener('click', function(e) {
                         'agentTransactionId': agentTransactionId,
                         'agentTransactionDate': dateTime,
                         'amountTo': Number(sumToPay),
-                        'amountFrom': Number(sumToPay) + 75
+                        'amountFrom': Number(sumToPay) + comission
                 })})
                 .then(res => {
                     return res.json()
@@ -671,6 +687,15 @@ payButton.addEventListener('click', function(e) {
                 .then(res => resultOrcestrator(res.result, agentTransactionId, res, dateTime, theForm.elements.account.value))
                  // параметры сервиса - ответ от сервера
                 .catch(err => console.log({ err }))
+
+                let thePayment = {
+                    'serviceId': serviceId,
+                    'account': theForm.elements.account.value,
+                    'agentTransactionId': agentTransactionId,
+                    'agentTransactionDate': dateTime,
+                    'amountTo': Number(sumToPay),
+                    'amountFrom': Number(sumToPay) + comission
+                }
            
             // popupServiceName.textContent = theService.title;
             // popupClientEmail.textContent = theEmailForm.elements.steamEmail.value;
@@ -693,6 +718,10 @@ function resultOrcestrator(result, agentTransactionId, res, dateTime, acc) {
 
 // Добавляем запись в базу
 
+if(cyberCard.checked) {
+    comission = 0;
+}
+
     fetch('https://api.payforsteam.ru/newpayment', { 
         method: 'POST',
         headers: { 
@@ -709,7 +738,7 @@ function resultOrcestrator(result, agentTransactionId, res, dateTime, acc) {
             'sumTo': ((Number(sumToPay) - Number(sumToPay) * 0.035) * localStorage.getItem('currencyRate')).toFixed(2),
             'sumCurrency': localStorage.getItem('currency'),
             'comissionPercentage': 3.5,
-            'comissionFee': 75,
+            'comissionFee': comission,
             'statusBank': 'В процессе',
             'statusPartner': 'Запрос check ' + res.resultMessage,
             'clientAccountId': acc
@@ -971,6 +1000,12 @@ function checkInputs() {
 // СБП
 
 function startSBP(order, agentTransactionId, dateTime) {
+
+    let paymentAmount = document.querySelector('.payment-sum');
+
+    if(cyberCard.checked) {
+        order.Amount = (Number(paymentAmount.value)) * 100;
+    }
 
     fetch('http://localhost:3000/sbpInit', { 
         method: 'POST',
@@ -1421,4 +1456,10 @@ function testPaymentReject(res) {
     generateToken(result).then((result) => {
         localStorage.setItem('tokenRejected', result);
         })
+}
+
+// расчет суммы к оплате, к зачислению, скидок и кэшбеков
+
+function paymentAmountAndCashbacks(payment) {
+    
 }
