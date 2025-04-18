@@ -339,7 +339,7 @@
 .payment-label-method {
     display: flex;
     align-items: center;
-    width: 92%;
+    width: 90%;
     justify-content: space-between;
     cursor: pointer;
 }

@@ -668,7 +668,7 @@ payButton.addEventListener('click', function(e) {
             //     let sum = 150;
             // }
 
-                fetch('https://api.payforsteam.ru/check', { 
+                fetch('http://localhost:3000/check', { 
                     method: 'POST', 
                     headers: { 
                         'Content-Type': 'application/json'
@@ -722,7 +722,7 @@ if(cyberCard.checked) {
     comission = 0;
 }
 
-    fetch('https://api.payforsteam.ru/newpayment', { 
+    fetch('http://localhost:3000/newpayment', { 
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json'
@@ -882,7 +882,7 @@ function resultPayOrcestrator(res, serviceId, agentTransactionId, dateTime) {
 
         // Обновление записи в базе
 
-        fetch('https://api.payforsteam.ru/payresult', { 
+        fetch('http://localhost:3000/payresult', { 
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json'
@@ -904,7 +904,7 @@ function resultPayOrcestrator(res, serviceId, agentTransactionId, dateTime) {
 
 function pay(serviceId, agentTransactionId, dateTime) {
 
-    fetch('https://api.payforsteam.ru/pay', { 
+    fetch('http://localhost:3000/pay', { 
         method: 'POST', 
         headers: { 
             'Content-Type': 'application/json'
@@ -1189,7 +1189,7 @@ function getQR(result, agentTransactionId, dateTime) {
 
                 // Обновление записи в базе
 
-                fetch('https://api.payforsteam.ru/payresultSBP', { 
+                fetch('http://localhost:3000/payresultSBP', { 
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json'
@@ -1308,7 +1308,7 @@ const result = values.join('');
 generateToken(result).then((result) => {
     localStorage.setItem('token', result);
 
-    fetch('https://api.payforsteam.ru/getState', { 
+    fetch('http://localhost:3000/getState', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
@@ -1353,7 +1353,7 @@ function statesOrcestrator(res, agentTransactionId, dateTime, payment) {
             
             // Обновление записи в базе
 
-            fetch('https://api.payforsteam.ru/payresultSBP', { 
+            fetch('http://localhost:3000/payresultSBP', { 
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json'
@@ -1379,7 +1379,7 @@ function statesOrcestrator(res, agentTransactionId, dateTime, payment) {
 
             // Обновление записи в базе
 
-            fetch('https://api.payforsteam.ru/payresultSBP', { 
+            fetch('http://localhost:3000/payresultSBP', { 
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json'

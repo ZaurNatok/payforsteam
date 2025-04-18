@@ -2,6 +2,7 @@ import express from 'express';
 import fetch from 'node-fetch';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 const app = express();
 
 app.use(cors());
@@ -176,7 +177,7 @@ console.log('вот он', reqClient.body)
       method: 'POST',
       headers: {
           'content-type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjUxIiwiVHlwZSI6IkFnZW50IiwiQWdlbnRJZCI6IjU2IiwibmJmIjoxNzM1MDYyMTYxLCJleHAiOjIwNDkwMzI3NzIsImlhdCI6MTczNTA2MjE2MSwiaXNzIjoiUGF5TmV0IiwiYXVkIjoiQ3liZXJpYVNvZnQifQ.SwDP4I3rXJ4UwA52aPWXDclJnoxlFp2cNC0MknDx58s'
+          'Authorization': `${authorizationProfitable}`
       },
       body: JSON.stringify(reqClient.body) // прокисуются данные с клиента
     })

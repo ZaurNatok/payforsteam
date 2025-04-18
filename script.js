@@ -258,7 +258,7 @@ let id = el.serviceId;
 
 // Загрузка новостей
 
-// getNews();
+getNews();
 
 function getNews () {
     return fetch(`https://newsdata.io/api/1/news?apikey=pub_5998959fa921d44bec0f4534d9d39848c29bd&q=steam&country=ru&language=ru`)
