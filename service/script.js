@@ -137,7 +137,7 @@ getServiceParamentres(serviceId);
 getCurrencyRate();
 
 function getCurrencyRate() {
-    fetch('http://localhost:3000/check', { 
+    fetch('https://api.payforsteam.ru/check', { 
         method: 'POST', 
         headers: { 
             'Content-Type': 'application/json'
@@ -190,7 +190,7 @@ function getServiceParamentres(id) {
 
     // theService(services) 
 
-    fetch('http://localhost:3000/service', { 
+    fetch('https://api.payforsteam.ru/service', { 
         method: 'POST', 
         headers: { 
             'Content-Type': 'application/json'
@@ -668,7 +668,7 @@ payButton.addEventListener('click', function(e) {
             //     let sum = 150;
             // }
 
-                fetch('http://localhost:3000/check', { 
+                fetch('https://api.payforsteam.ru/check', { 
                     method: 'POST', 
                     headers: { 
                         'Content-Type': 'application/json'
@@ -722,7 +722,7 @@ if(cyberCard.checked) {
     comission = 0;
 }
 
-    fetch('http://localhost:3000/newpayment', { 
+    fetch('https://api.payforsteam.ru/newpayment', { 
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json'
@@ -882,7 +882,7 @@ function resultPayOrcestrator(res, serviceId, agentTransactionId, dateTime) {
 
         // Обновление записи в базе
 
-        fetch('http://localhost:3000/payresult', { 
+        fetch('https://api.payforsteam.ru/payresult', { 
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json'
@@ -904,7 +904,7 @@ function resultPayOrcestrator(res, serviceId, agentTransactionId, dateTime) {
 
 function pay(serviceId, agentTransactionId, dateTime) {
 
-    fetch('http://localhost:3000/pay', { 
+    fetch('https://api.payforsteam.ru/pay', { 
         method: 'POST', 
         headers: { 
             'Content-Type': 'application/json'
@@ -1007,7 +1007,7 @@ function startSBP(order, agentTransactionId, dateTime) {
         order.Amount = (Number(paymentAmount.value)) * 100;
     }
 
-    fetch('http://localhost:3000/sbpInit', { 
+    fetch('https://api.payforsteam.ru/sbpInit', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
@@ -1122,7 +1122,7 @@ function getQR(result, agentTransactionId, dateTime) {
     
             if( screen.width <= 480 ) {
 
-                fetch('http://localhost:3000/generateQR', { 
+                fetch('https://api.payforsteam.ru/generateQR', { 
                     method: 'POST',
                     headers: { 
                     'Content-Type': 'application/json'
@@ -1148,7 +1148,7 @@ function getQR(result, agentTransactionId, dateTime) {
 
             } else {
 
-                fetch('http://localhost:3000/generateQR', { 
+                fetch('https://api.payforsteam.ru/generateQR', { 
                     method: 'POST',
                     headers: { 
                     'Content-Type': 'application/json'
@@ -1189,7 +1189,7 @@ function getQR(result, agentTransactionId, dateTime) {
 
                 // Обновление записи в базе
 
-                fetch('http://localhost:3000/payresultSBP', { 
+                fetch('https://api.payforsteam.ru/payresultSBP', { 
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json'
@@ -1209,7 +1209,7 @@ function getQR(result, agentTransactionId, dateTime) {
 
 function showQR(res, agentTransactionId, dateTime) {
 
-    fetch('http://localhost:3000/getQr', { 
+    fetch('https://api.payforsteam.ru/getQr', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
@@ -1229,7 +1229,7 @@ function showQR(res, agentTransactionId, dateTime) {
 }
 
 function showPayload(res, agentTransactionId, dateTime) {
-    fetch('http://localhost:3000/getQr', { 
+    fetch('https://api.payforsteam.ru/getQr', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
@@ -1308,7 +1308,7 @@ const result = values.join('');
 generateToken(result).then((result) => {
     localStorage.setItem('token', result);
 
-    fetch('http://localhost:3000/getState', { 
+    fetch('https://api.payforsteam.ru/getState', { 
         method: 'POST',
         headers: { 
         'Content-Type': 'application/json'
@@ -1353,7 +1353,7 @@ function statesOrcestrator(res, agentTransactionId, dateTime, payment) {
             
             // Обновление записи в базе
 
-            fetch('http://localhost:3000/payresultSBP', { 
+            fetch('https://api.payforsteam.ru/payresultSBP', { 
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json'
@@ -1379,7 +1379,7 @@ function statesOrcestrator(res, agentTransactionId, dateTime, payment) {
 
             // Обновление записи в базе
 
-            fetch('http://localhost:3000/payresultSBP', { 
+            fetch('https://api.payforsteam.ru/payresultSBP', { 
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json'
