@@ -64,7 +64,7 @@ const services = [
         isVoucher: true,
         clientInfo: 'email',
         isPopular: true,
-        imageLink: './img/roblox.jpg',
+        imageLink: '../img/roblox.jpg',
         id: 2
     },
     {
@@ -967,7 +967,7 @@ const services = [
         type: 'Программы',
         title: 'Adobe Creative Cloud',
         subtitle: 'Для аккаунтов США. При регистрации нового аккаунта используйте почту с доменом gmail.com',
-        imageLink: './img/adobeCreativeCloud.jpg',
+        imageLink: '../img/adobeCreativeCloud.jpg',
         popupTypes: ['Ваучер'],
         region: [ 
             {
@@ -984,7 +984,7 @@ const services = [
         type: 'Программы',
         title: 'Discord Nitro',
         subtitle: 'Для аккаунтов любого региона. При регистрации нового аккаунта использовать почту с доменом gmail.com',
-        imageLink: './img/discord.jpg',
+        imageLink: '../img/discord.jpg',
         popupTypes: ['Ваучер'],
         region: [ 
             {
