@@ -462,7 +462,17 @@ font-style: normal;
         border-radius: 20px;
         margin: auto;
     }
+
+    .banner-content__wrapper {
+        flex-direction: column;
+        padding: 20px;
+    }
     
+
+    .banner-content__info {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
     
 
     .items_main {
